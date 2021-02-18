@@ -16,13 +16,13 @@ pipeline {
         stage ('Build Docker Image') {
                 agent any
                 steps {
-                        docker.build("${params.DOCKER_IMAGE_NAME}", ".")
+                        build("${params.DOCKER_IMAGE_NAME}", ".")
                 }
             }
             stage ('Run Docker Container') {
                 agent any
                 steps {
-                    docker.image("${params.DOCKER_IMAGE_NAME}").withRun("-p 3000:3000")
+                    image("${params.DOCKER_IMAGE_NAME}").withRun("-p 3000:3000")
                 }
             }
         }
