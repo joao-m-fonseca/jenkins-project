@@ -22,7 +22,7 @@ pipeline {
             stage ('Run Docker Container') {
                 agent any
                 steps {
-                    sh 'docker conainer ls | grep "${DOCKER_CONTAINER_NAME}" && docker rm "${DOCKER_CONTAINER_NAME}"'
+                    sh 'docker container ls | grep "${DOCKER_CONTAINER_NAME}" && docker rm "${DOCKER_CONTAINER_NAME}"'
                     sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
                 }
             }
