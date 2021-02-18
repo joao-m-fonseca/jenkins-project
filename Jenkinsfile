@@ -3,7 +3,7 @@ pipeline {
     
     parameters { 
         string(name: 'DOCKER_IMAGE_NAME', defaultValue: 'nodejs', description: 'Adicionar um nome a imagem docker')
-        string(name: 'DOCKER_CONTAINER_NAME', defaultValue: 'nodejsv0.1', description: 'Adicionar um nome do container')
+        string(name: 'DOCKER_CONTAINER_NAME', defaultValue: 'nodejs', description: 'Adicionar um nome do container')
     }
     stages {
         stage ('build Docker Image') {
