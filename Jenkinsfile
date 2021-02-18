@@ -22,7 +22,7 @@ pipeline {
             stage ('Run Docker Container') {
                 agent any
                 steps {
-                    sh 'docker run --detach --publish=3000:3000 ${DOCKER_CONTAINER_NAME}'
+                    sh 'docker run --detach --publish=3000:3000 '
                     sh 'docker rm -f '
                     sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
                 }
