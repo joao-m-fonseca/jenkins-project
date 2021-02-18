@@ -13,16 +13,16 @@ pipeline {
                 cleanWs()
             }
         }
-        stage ('build Docker Image') {
+        stage ('Build Docker Image') {
                 agent any
                 steps {
-                        sh 'docker build -t "${DOCKER_IMAGE_NAME}" .'
+                        docker.build("${params.DOCKER_IMAGE_NAME}", .)
                 }
             }
             stage ('Run Docker Container') {
                 agent any
                 steps {
-                    sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
+                    docker.image("${params.DOCKER_IMAGE_NAME}").withRun("-p 3000:3000")
                 }
             }
         }
