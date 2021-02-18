@@ -22,8 +22,7 @@ pipeline {
             stage ('Run Docker Container') {
                 agent any
                 steps {
-                    sh 'docker stop $(docker ps -a -q)'
-                    sh 'docker rm $(docker ps -a -q)'
+                    sh 'docker rm -f "${DOCKER_IMAGE_NAME}"'
                     sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
                 }
             }
