@@ -15,12 +15,10 @@ pipeline {
             stage ('Run Docker Container') {
                 agent any
                 when {
-                    sh ' docker ps -q -f name"${DOCKER_CONTAINER_NAME}"'
+                    sh 'docker ps -q -f name"${DOCKER_CONTAINER_NAME}"'
                 }
                 steps {
                     sh 'docker rm ${DOCKER_CONTAINER_NAME}'
-                }
-                steps {
                     sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
                 }
             }
