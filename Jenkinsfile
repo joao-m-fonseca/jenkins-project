@@ -9,10 +9,7 @@ pipeline {
         stage ('build Docker Image') {
                 agent any
                 steps {
-                        sh ' bash if [ ! (docker ps -q -f name"${DOCKER_CONTAINER_NAME}") ]; then
-                            if [ (docker ps -aq -f status=exited -f name="${DOCKER_CONTAINER_NAME}")" ]; then
-                            # cleanup
-                            docker rm ${DOCKER_CONTAINER_NAME}'
+                        sh 'docker build -t "${DOCKER_IMAGE_NAME}" .'
                 }
             }
             stage ('Run Docker Container') {
