@@ -23,7 +23,7 @@ pipeline {
                 agent any
                 steps {
                     //sh 'docker rm -f "${DOCKER_IMAGE_NAME}"'
-                    sh 'docker ps -a | awk '{ print $1,$2 }' | grep "${DOCKER_IMAGE_NAME}" | awk '{print $1 }' | xargs -I {} docker rm {}'
+                    sh 'docker ps -a | awk "{ print $1,$2 }" | grep "${DOCKER_IMAGE_NAME}" | awk "{print $1 }" | xargs -I {} docker rm {}'
                     sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
                 }
             }
