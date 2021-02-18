@@ -16,7 +16,7 @@ pipeline {
         stage ('Build Docker Image') {
                 agent any
                 steps {
-                        docker.build("${params.DOCKER_IMAGE_NAME}", .)
+                        docker.build("${params.DOCKER_IMAGE_NAME}", ".")
                 }
             }
             stage ('Run Docker Container') {
