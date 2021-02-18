@@ -16,13 +16,14 @@ pipeline {
         stage ('Build Docker Image') {
                 agent any
                 steps {
-                        build("${params.DOCKER_IMAGE_NAME}", ".")
+                        sh 'docker build -t "${DOCKER_IMAGE_NAME}" .'
                 }
             }
             stage ('Run Docker Container') {
                 agent any
                 steps {
-                    image("${params.DOCKER_IMAGE_NAME}").withRun("-p 3000:3000")
+                    sh 'docker conainer ls | grep "${DOCKER_CONTAINER_NAME}" && docker rm "${DOCKER_CONTAINER_NAME}"
+                    sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
                 }
             }
         }
