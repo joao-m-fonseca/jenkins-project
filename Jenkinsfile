@@ -1,10 +1,9 @@
 pipeline {
     agent any
     
-    environment { 
-        FILE_NAME = 'newFile.txt'
-        FILE_NAME_MY_ARCHIVE = 'myarchive.txt'
-        ZIP_FILE_NAME = 'textfiles.zip'
+    parameters { 
+        string(name: 'FILE_NAME', defaultValue: 'myFile.txt', description: 'File name to archive')
+        string(name: 'ZIP_FILE_NAME', defaultValue: 'myflize.zip', description: 'File name to archive')
     }
     stages {
         stage ('Parallel Stage') {
@@ -18,7 +17,7 @@ pipeline {
             stage ('Create myarchive') {
                 agent any
                 steps {
-                    writeFile file: "$FILE_NAME_MY_ARCHIVE", text: 'hello write file, I am John'
+                    writeFile file: "${params.FILE_NAME_MY_ARCHIVE}", text: 'hello write file, I am John'
                 }
             }
         }
