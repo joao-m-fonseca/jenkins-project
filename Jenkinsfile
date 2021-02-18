@@ -15,8 +15,7 @@ pipeline {
             stage ('Run Docker Container') {
                 agent any
                 steps {
-                   dockerRun("${params.DOCKER_CONTAINER_NAME}", -p 3000:3000)
-                    //sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
+                    sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
                 }
             }
         }
