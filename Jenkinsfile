@@ -6,6 +6,13 @@ pipeline {
         string(name: 'DOCKER_CONTAINER_NAME', defaultValue: 'nodejs', description: 'Adicionar um nome do container')
     }
     stages {
+        stage ('CleanResources') {
+            agent any
+            steps
+            {
+                cleanWs()
+            }
+        }
         stage ('build Docker Image') {
                 agent any
                 steps {
