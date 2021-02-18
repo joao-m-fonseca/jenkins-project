@@ -15,7 +15,7 @@ pipeline {
             stage ('Run Docker Container') {
                 agent any
                 when {
-                    sh 'docker ps -q -f name"${DOCKER_CONTAINER_NAME}"'
+                    equals expected: ${DOCKER_CONTAINER_NAME}, actual: sh 'docker ps -q -f name"${DOCKER_CONTAINER_NAME}"'
                 }
                 steps {
                     sh 'docker rm ${DOCKER_CONTAINER_NAME}'
