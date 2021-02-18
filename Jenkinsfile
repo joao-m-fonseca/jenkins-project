@@ -3,6 +3,7 @@ pipeline {
     
     parameters { 
         string(name: 'FILE_NAME', defaultValue: 'myFile.txt', description: 'File name to archive')
+        string(name: 'FILE_NAME_2', defaultValue: 'myFile2.txt', description: 'File name to archive')
         string(name: 'ZIP_FILE_NAME', defaultValue: 'myflize.zip', description: 'File name to archive')
     }
     stages {
@@ -11,7 +12,7 @@ pipeline {
             stage ('Create File 1') {
                 agent any
                 steps {
-                    writeFile file: "$FILE_NAME", text: 'hello write file'
+                    writeFile file: "${params.FILE_NAME_2}, text: 'hello write file'
                 }
             }
             stage ('Create myarchive') {
