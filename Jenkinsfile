@@ -9,13 +9,16 @@ pipeline {
         stage ('build Docker Image') {
                 agent any
                 steps {
-                    sh 'docker build -t "${DOCKER_IMAGE_NAME}" .'
+                        sh 'if [ ! (docker ps -q -f name"${DOCKER_CONTAINER_NAME}") ]; then
+                            if [ (docker ps -aq -f status=exited -f name="${DOCKER_CONTAINER_NAME}")" ]; then
+                            # cleanup
+                            docker rm ${DOCKER_CONTAINER_NAME}'
                 }
             }
             stage ('Run Docker Container') {
                 agent any
                 steps {
-                    sh 'docker run -d -p 3000:3000 "${DOCKER_CONTAINER_NAME}"'
+                    sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
                 }
             }
         }
