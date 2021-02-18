@@ -12,7 +12,7 @@ pipeline {
             stage ('Create File 1') {
                 agent any
                 steps {
-                    writeFile file: "${params.FILE_NAME_2}, text: 'hello write file'
+                    writeFile file: "${params.FILE_NAME_2}", text: 'hello write file'
                 }
             }
             stage ('Create myarchive') {
@@ -25,7 +25,7 @@ pipeline {
     }
         stage('Archive Artifact .zip File') {
             steps {
-                zip archive: true, dir: '', glob: '', zipFile: "$ZIP_FILE_NAME"
+                zip archive: true, dir: '', glob: '', zipFile: "${params.ZIP_FILE_NAME}"
             }
         }
     }
