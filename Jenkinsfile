@@ -9,17 +9,14 @@ pipeline {
         stage ('build Docker Image') {
                 agent any
                 steps {
-                        sh 'docker build -t "${DOCKER_IMAGE_NAME}" .'
+                        dockerImageBuild("${params.DOCKER_IMAGE_NAME}")
                 }
             }
             stage ('Run Docker Container') {
                 agent any
-                when {
-                    equals expected: ${DOCKER_CONTAINER_NAME}, actual: sh 'docker ps -q -f name"${DOCKER_CONTAINER_NAME}"'
-                }
                 steps {
-                    sh 'docker rm ${DOCKER_CONTAINER_NAME}'
-                    sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
+                   dockerRun("${params.DOCKER_CONTAINER_NAME}", -p 3000:3000)
+                    //sh 'docker run -d -p 3000:3000 --name "${DOCKER_CONTAINER_NAME}" "${DOCKER_IMAGE_NAME}"'
                 }
             }
         }
